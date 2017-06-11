@@ -4,4 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 
 def home(request):
-    return HttpResponse("<h1>Pepper v02</h1>")
+    context = {
+        "title": "Pepper v02",
+    }
+    return render(request, "home.html", context)
