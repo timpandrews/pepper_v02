@@ -4,38 +4,92 @@
 {% block title %} | Welcome{% endblock %}
 
 {% block jumbotron %}
-    <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <div class="container">
-            <h1>Pepper</h1>
-            <p>Distance to power generators? One-seven, decimal two-eight. Target. Maximum fire power. Transport, this is Solo. Better take off - I can't get to you. </p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-        </div>
+        <p class="center">
+            <img class="logo_jumbotron" src="{% static 'img/gardenShare_logoBlack.png' %}">
+        </p>
+        <p>Garden Share lets you track all you gardening success (and failures) and if you like you can share your gardening experience with your friends and followers.</p>
+        <p class="center">
+            <a class="btn btn-lg btn-default" href="#features" role="button">Learn More &raquo;</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-lg btn-default" href="{% url "journal:page1" %}" role="button">Sing Up</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-lg btn-default" href="{% url "journal:page1" %}" role="button">Login</a>
+        </p>
     </div>
 {% endblock %}
 
 {% block content %}
 
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-        </div>
-    </div>
+    <div class="row" id="features">
+        <div class="col-sm-4">
+            <p class="center"><i class="fa fa-pagelines fa-3x"></i></p>
+            <p class="lead center">Garden Log/Diary</p>
+            <p>Keep a log/diary of you gardening experience.  Include pictures and videos.  Show off your sucess or help others learn from your mistakes.</p>
+        </div> <!-- /col -->
+        <div class="col-sm-4">
+            <p class="center"><i class="fa fa-share-alt fa-3x"></i></p>
+            <p class="lead center">Share Your Garden</p>
+            <p>Share your garden with the world.  Or just share it with a few select friends.  You control what you share and who you share it with.</p>
+        </div> <!-- /col -->
+        <div class="col-sm-4">
+            <p class="center"><i class="fa fa-user fa-3x"></i></p>
+            <p class="lead center">Follow Other Gardeners</p>
+            <p>Follow Expert Gardeners to see how they do it or follow your friends to see how you compare.</p>
+        </div> <!-- /col -->
+    </div> <!-- /row -->
+    <br><br><br><br><br><br>
+    <div class="row" id="pricing">
+        <div class="col-sm-11 col-sm-offset-1">
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-1">
+                    <div class="panel panel-default text-center panel-pricing">
+                        <div class="panel-heading">
+                            <p>$<span class="amount">Free</span></p>
+                            <p>Free-Trial</p>
+                        </div>
+                        <div class="panel-body">
+                            <p>30-day free trial</p>
+                            <p>Full Feature</p>
+                            <p>No Adds</p>
+                            <p>No Credit Card Needed</p>
+                            <a class="btn btn-lg btn-success " href="#" role="button">Sing Up</a>
+                        </div>
+                    </div>
+                </div> <!-- /col -->
+                <div class="col-sm-3">
+                    <div class="panel panel-default text-center panel-pricing">
+                        <div class="panel-heading">
+                            <p>$<span class="amount">2</span>/month</p>
+                            <p>Monthly</p>
+                        </div>
+                        <div class="panel-body text-center">
+                            <p>Simple low monthly price</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                            <a class="btn btn-lg btn-success" href="#" role="button">Buy Now</a>
+                        </div>
+                    </div>
+                </div> <!-- /col -->
+                <div class="col-sm-3">
+                    <div class="panel panel-success text-center panel-pricing">
+                        <div class="panel-heading text-center">
+                            <p>$<span class="amount">15</span>/year</p>
+                            <p>Yearly</p>
+                        </div>
+                        <div class="panel-body">
+                            <p>Pay for a year and save!</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                            <a class="btn btn-lg btn-success" href="#" role="button">Buy Now</a>
+                        </div>
+                    </div>
+                </div> <!-- /col -->
+            </div> <!-- /row -->
+        </div> <!-- /col -->
+    </div> <!-- /row -->
 
 {% endblock %}
 

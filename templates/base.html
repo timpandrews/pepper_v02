@@ -19,12 +19,12 @@
 
     {% include '_messages.html' %}
 
-    {% include '_navbar.html' %}
-
-    {% block jumbotron %}
-    {% endblock %}
-
     <div class="container">
+
+        {% include '_navbar.html' %}
+
+        {% block jumbotron %}
+        {% endblock %}
 
         {% block content %}
         {% endblock %}
