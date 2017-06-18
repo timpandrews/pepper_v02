@@ -10,3 +10,5 @@ gen
 
 /static_root/
 /media_root/
+/db.sqlite3
+

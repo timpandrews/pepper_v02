@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Local Apps
+    'journal',
+
+    # 3rd Party Apps
 ]
 
 MIDDLEWARE = [
@@ -73,6 +78,7 @@ WSGI_APPLICATION = 'src.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# TODO: Upgrade to MySQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

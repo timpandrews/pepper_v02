@@ -3,12 +3,18 @@ from django.shortcuts import render
 
 def home(request):
     context = {
-        "title": "Pepper v02",
+
     }
     return render(request, "home.html", context)
 
+def journal(request):
+    context = {
+
+    }
+    return render(request, "journal.html", context)
+
 def page1(request):
     context = {
-        "title": "Pepper v02",
+        "title": "Page 1",
     }
     return render(request, "page1.html", context)
