@@ -1,32 +1,45 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from journal.models import Journal
+
 def home(request):
     context = {
 
     }
     return render(request, "home.html", context)
 
-def journal_home(request):
+def journal_create(request):
     context = {
-
+        'title': 'create'
     }
     return render(request, "journal.html", context)
 
-def journal_create(request):
-    return HttpResponse("<h1>Create</h1>")
-
 def journal_detail(request):
-    return HttpResponse("<h1>Detail</h1>")
+    context = {
+        'title': 'detail'
+    }
+    return render(request, "journal.html", context)
 
 def journal_list(request):
-    return HttpResponse("<h1>List</h1>")
+    qs = Journal.objects.all()
+    context = {
+        'journal': qs,
+        'title': 'list'
+    }
+    return render(request, "journal.html", context)
 
 def journal_update(request):
-    return HttpResponse("<h1>Update</h1>")
+    context = {
+        'title': 'upczgd'
+    }
+    return render(request, "journal.html", context)
 
 def journal_delete(request):
-    return HttpResponse("<h1>Delete</h1>")
+    context = {
+        'title': 'delete'
+    }
+    return render(request, "journal.html", context)
 
 def page1(request):
     context = {

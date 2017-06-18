@@ -9,5 +9,15 @@
 {% block content %}
 
     <h1>Garden Journal</h1>
+    <h3>{{ title }}</h3>
+
+    {% for entry in journal %}
+        {{ entry.id }}</br>
+        {{ entry.title }}</br>
+        {{ entry.content }}</br>
+        {{ entry.createTS }}</br>
+        {{ entry.updateTS }}</br>
+        <hr>
+    {% endfor %}
 
 {% endblock %}

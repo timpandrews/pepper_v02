@@ -2,7 +2,6 @@ from django.conf.urls import url
 
 from journal.views import (
     home,
-    journal_home,
     journal_create,
     journal_delete,
     journal_detail,
@@ -12,8 +11,7 @@ from journal.views import (
 )
 
 urlpatterns = [
-    url(r'^$', home, name='home'),
-    url(r'^journal/$', journal_home, name='journal'), # List
+    url(r'^journal/$', journal_list, name='journal'),
     url(r'^journal/create/$', journal_create),
     url(r'^journal/delete/$', journal_delete),
     url(r'^journal/detail/$', journal_detail),
