@@ -10,3 +10,5 @@ gen
 /_env/
 *.pyc
 
+/static_root/
+/media_root/
