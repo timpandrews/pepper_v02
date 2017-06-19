@@ -12,7 +12,7 @@ from journal.views import (
 urlpatterns = [
     url(r'^journal/$', journal_list, name='journal'),
     url(r'^journal/(?P<id>\d+)/$', journal_detail, name='detail'),
-    url(r'^journal/create/$', journal_create),
+    url(r'^journal/create/$', journal_create, name='create'),
     url(r'^journal/delete/$', journal_delete),
     url(r'^journal/update/$', journal_update),
     url(r'^page1/$', page1, name='page1'),

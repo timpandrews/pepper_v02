@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} | Garden Journal{% endblock %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>Garden Journal</h1>
+    <h3>{{ title }}</h3>
+
+    <form method='POST' action=''>{% csrf_token %}
+        {{ form.as_p }}
+        <input type='submit' value='Create Post' class="btn btn-success"/>
+    </form>
+
+    <hr>
+
+    <a href='{% url "journal:journal" %}'>Return to List</a>
+
+
+{% endblock %}
