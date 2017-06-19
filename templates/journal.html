@@ -12,8 +12,8 @@
     <h3>{{ title }}</h3>
 
     {% for entry in journal %}
+        <a href='{{ entry.get_absolute_url }}'><b>{{ entry.title }}</b></a></br>
         {{ entry.id }}</br>
-        {{ entry.title }}</br>
         {{ entry.content }}</br>
         {{ entry.createTS }}</br>
         {{ entry.updateTS }}</br>

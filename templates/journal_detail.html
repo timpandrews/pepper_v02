@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} | Garden Journal{% endblock %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>Garden Journal</h1>
+    <h3>{{ title }}</h3>
+
+    {{ entry.id }}</br>
+    {{ entry.title }}</br>
+    {{ entry.content }}</br>
+    {{ entry.createTS }}</br>
+    {{ entry.updateTS }}</br>
+
+    <hr>
+
+    <a href='{% url "journal:journal" %}'>Return to List</a>
+
+
+{% endblock %}

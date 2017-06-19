@@ -1,5 +1,4 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from journal.models import Journal
 
@@ -15,11 +14,13 @@ def journal_create(request):
     }
     return render(request, "journal.html", context)
 
-def journal_detail(request):
+def journal_detail(request, id=None):
+    entry = get_object_or_404(Journal, id=id)
     context = {
-        'title': 'detail'
+        'entry': entry,
+        'title': entry.title
     }
-    return render(request, "journal.html", context)
+    return render(request, "journal_detail.html", context)
 
 def journal_list(request):
     qs = Journal.objects.all()
