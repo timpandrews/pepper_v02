@@ -14,7 +14,11 @@
 
     <form method='POST' action=''>{% csrf_token %}
         {{ form | crispy }}
-        <input type='submit' value='Create Post' class="btn btn-success"/>
+        {% if 'edit' in request.get_full_path %}
+            <input type='submit' value='Edit Post' class="btn btn-success"/>
+        {% else %}
+            <input type='submit' value='Create Post' class="btn btn-success"/>
+        {% endif %}
     </form>
 
     <hr>

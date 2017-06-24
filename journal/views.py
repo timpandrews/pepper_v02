@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
@@ -16,7 +17,10 @@ def journal_create(request):
         instance = form.save(commit=False)
         print(form.cleaned_data.get("title"))
         instance.save()
+        messages.success(request, "Successfully Created")
         return HttpResponseRedirect(instance.get_absolute_url())
+    else:
+        messages.error(request, "Not Created" )
     context = {
         "form": form,
     }
@@ -45,6 +49,7 @@ def journal_update(request, id=None):
         instance = form.save(commit=False)
         print(form.cleaned_data.get("title"))
         instance.save()
+        messages.success(request, "Successfully Updated" )
         return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         'entry': entry,
