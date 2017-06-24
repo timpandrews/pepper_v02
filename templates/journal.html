@@ -23,9 +23,27 @@
                 </div> <!-- / thumbnail -->
             {% endfor %}
 
+            <div class="pagination">
+                <span class="step-links">
+                    {% if journal.has_previous %}
+                        <a class="btn btn-xs btn-primary" href="?page={{ journal.previous_page_number }}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ journal.number }} of {{ journal.paginator.num_pages }}.
+                    </span>
+
+                    {% if journal.has_next %}
+                        <a class="btn btn-xs btn-primary" href="?page={{ journal.next_page_number }}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    {% endif %}
+                </span>
+            </div>
+
             <hr>
             <a class="btn btn-success" href='{% url "journal:create" %}'><i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
         </div> <!-- /col -->
     </div> <!-- /row -->
 {% endblock %}
+
+
 

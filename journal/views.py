@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -35,7 +36,19 @@ def journal_detail(request, id=None):
     return render(request, "journal_detail.html", context)
 
 def journal_list(request):
-    qs = Journal.objects.all()
+    qs_list = Journal.objects.all().order_by('-createTS')
+    paginator = Paginator(qs_list, 3)
+
+    page = request.GET.get('page')
+    try:
+        qs = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        qs = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        qs = paginator.page(paginator.num_pages)
+
     context = {
         'journal': qs,
         'title': 'list'
