@@ -7,22 +7,20 @@
 {% endblock %}
 
 {% block content %}
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <h1>Garden Journal</h1>
+            <h3>{{ title }} <small>{{ entry.createTS }}</small></h3>
+            {{ entry.content|linebreaks }}</br>
+            <small>id:{{ entry.id }}</small></br>
 
-    <h1>Garden Journal</h1>
-    <h3>{{ title }}</h3>
+            <hr>
+            <a class="btn btn-success" href='{% url "journal:update" id=entry.id %}'><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+            <a class="btn btn-success" href='{% url "journal:delete" id=entry.id %}'><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 
-    {{ entry.id }}</br>
-    {{ entry.title }}</br>
-    {{ entry.content }}</br>
-    {{ entry.createTS }}</br>
-    {{ entry.updateTS }}</br>
-
-    <hr>
-    <a class="btn btn-success" href='{% url "journal:update" id=entry.id %}'><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-    <a class="btn btn-success" href='{% url "journal:delete" id=entry.id %}'><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
-
-    <hr>
-    <a href='{% url "journal:journal" %}'>Return to List</a>
-
+            <hr>
+            <a href='{% url "journal:journal" %}'>Return to List</a>
+        </div> <!-- /col -->
+    </div> <!-- /row -->
 
 {% endblock %}
