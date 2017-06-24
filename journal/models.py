@@ -1,8 +1,10 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
+
 class Journal(models.Model):
     title = models.CharField(max_length=120)
+    badge = models.FileField(null=True, blank=True) #TODO ImageField, width_field, height_field
     content = models.TextField()
     createTS = models.DateTimeField(auto_now=False, auto_now_add=True)
     updateTS = models.DateTimeField(auto_now=True, auto_now_add=False)

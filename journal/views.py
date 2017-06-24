@@ -13,7 +13,7 @@ def home(request):
     return render(request, "home.html", context)
 
 def journal_create(request):
-    form = JournalForm(request.POST or None)
+    form = JournalForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
         print(form.cleaned_data.get("title"))
@@ -57,7 +57,7 @@ def journal_list(request):
 
 def journal_update(request, id=None):
     entry = get_object_or_404(Journal, id=id)
-    form = JournalForm(request.POST or None, instance=entry)
+    form = JournalForm(request.POST or None, request.FILES or None, instance=entry)
     if form.is_valid():
         instance = form.save(commit=False)
         print(form.cleaned_data.get("title"))

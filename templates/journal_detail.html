@@ -10,7 +10,10 @@
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <h1>Garden Journal</h1>
-            <h3>{{ title }} <small>{{ entry.createTS }}</small></h3>
+            {% if entry.badge %}
+                <img src='{{ entry.badge.url }}' class='img-responsive' />
+            {% endif %}
+            <h3>{{ entry.title }} <small>{{ entry.createTS }}</small></h3>
             {{ entry.content|linebreaks }}</br>
             <small>id:{{ entry.id }}</small></br>
 
