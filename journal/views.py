@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from journal.forms import JournalForm
 from journal.models import Journal
@@ -58,11 +58,12 @@ def journal_update(request, id=None):
     }
     return render(request, "journal_form.html", context)
 
-def journal_delete(request):
-    context = {
-        'title': 'delete'
-    }
-    return render(request, "journal.html", context)
+def journal_delete(request, id=None):
+    entry = get_object_or_404(Journal, id=id)
+    entry.delete()
+    messages.success(request, "Successfully Deleted" )
+    return redirect('journal:journal')
+
 
 def page1(request):
     context = {

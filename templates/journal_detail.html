@@ -19,6 +19,7 @@
 
     <hr>
     <a class="btn btn-success" href='{% url "journal:update" id=entry.id %}'><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+    <a class="btn btn-success" href='{% url "journal:delete" id=entry.id %}'><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 
     <hr>
     <a href='{% url "journal:journal" %}'>Return to List</a>
