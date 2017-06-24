@@ -18,7 +18,9 @@
     {{ entry.updateTS }}</br>
 
     <hr>
+    <a class="btn btn-success" href='{% url "journal:update" id=entry.id %}'><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
 
+    <hr>
     <a href='{% url "journal:journal" %}'>Return to List</a>
 
 

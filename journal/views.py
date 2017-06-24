@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 from journal.forms import JournalForm
@@ -15,6 +16,7 @@ def journal_create(request):
         instance = form.save(commit=False)
         print(form.cleaned_data.get("title"))
         instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         "form": form,
     }
@@ -36,11 +38,20 @@ def journal_list(request):
     }
     return render(request, "journal.html", context)
 
-def journal_update(request):
+def journal_update(request, id=None):
+    entry = get_object_or_404(Journal, id=id)
+    form = JournalForm(request.POST or None, instance=entry)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        print(form.cleaned_data.get("title"))
+        instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
     context = {
-        'title': 'upczgd'
+        'entry': entry,
+        'title': entry.title,
+        "form": form,
     }
-    return render(request, "journal.html", context)
+    return render(request, "journal_form.html", context)
 
 def journal_delete(request):
     context = {
