@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from journal.forms import JournalForm
 from journal.models import Journal
 
+
 def home(request):
     context = {
 
@@ -27,8 +28,8 @@ def journal_create(request):
     }
     return render(request, "journal_form.html", context)
 
-def journal_detail(request, id=None):
-    entry = get_object_or_404(Journal, id=id)
+def journal_detail(request, slug=None):
+    entry = get_object_or_404(Journal, slug=slug)
     context = {
         'entry': entry,
         'title': entry.title
@@ -55,8 +56,8 @@ def journal_list(request):
     }
     return render(request, "journal.html", context)
 
-def journal_update(request, id=None):
-    entry = get_object_or_404(Journal, id=id)
+def journal_update(request, slug=None):
+    entry = get_object_or_404(Journal, slug=slug)
     form = JournalForm(request.POST or None, request.FILES or None, instance=entry)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -71,12 +72,11 @@ def journal_update(request, id=None):
     }
     return render(request, "journal_form.html", context)
 
-def journal_delete(request, id=None):
-    entry = get_object_or_404(Journal, id=id)
+def journal_delete(request, slug=None):
+    entry = get_object_or_404(Journal, slug=slug)
     entry.delete()
     messages.success(request, "Successfully Deleted" )
     return redirect('journal:journal')
-
 
 def page1(request):
     context = {

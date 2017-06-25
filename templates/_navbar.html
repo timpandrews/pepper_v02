@@ -17,7 +17,7 @@
             <ul class="nav navbar-nav">
                 <li {# class="active" #}><a href='{% url "home" %}'>Home</a></li>
                 <li><a href='{% url "journal:journal" %}'>Garden Journal</a></li>
-                <li><a href='{% url "journal:page1" %}'>page1</a></li>
+                <li><a href='/admin'>Admin</a></li> <!-- TODO: Remove from prod -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if not request.user_is_authenticated %}
