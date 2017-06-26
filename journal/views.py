@@ -14,12 +14,12 @@ def home(request):
     return render(request, "home.html", context)
 
 def journal_create(request):
-    if not request.user.is_staff or not request.user.is_superuser:
+    if not request.user.is_authenticated:
         raise Http404
     form = JournalForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
-        print(form.cleaned_data.get("title"))
+        instance.user = request.user
         instance.save()
         messages.success(request, "Successfully Created")
         return HttpResponseRedirect(instance.get_absolute_url())
@@ -59,13 +59,13 @@ def journal_list(request):
     return render(request, "journal.html", context)
 
 def journal_update(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
+    if not request.user.is_authenticated:
         raise Http404
     entry = get_object_or_404(Journal, slug=slug)
     form = JournalForm(request.POST or None, request.FILES or None, instance=entry)
     if form.is_valid():
         instance = form.save(commit=False)
-        print(form.cleaned_data.get("title"))
+        instance.user = request.user
         instance.save()
         messages.success(request, "Successfully Updated" )
         return HttpResponseRedirect(instance.get_absolute_url())
@@ -77,7 +77,7 @@ def journal_update(request, slug=None):
     return render(request, "journal_form.html", context)
 
 def journal_delete(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
+    if not request.user.is_authenticated:
         raise Http404
     entry = get_object_or_404(Journal, slug=slug)
     entry.delete()

@@ -17,10 +17,20 @@
                         <img src='{{ entry.badge.url }}' class='img-responsive' />
                     {% endif %}
                     <div class="caption">
-                        <h3><b><a href='{{ entry.get_absolute_url }}'>{{ entry.title }}</a></b> <small>{{ entry.createTS|timesince }} ago</small></h3>
+                        <h3>
+                            <b><a href='{{ entry.get_absolute_url }}'>{{ entry.title }}</a></b>
+                            <small>{{ entry.createTS|timesince }} ago (id:{{ entry.id }})</small>
+                        </h3>
+                        <p>
+                            Author:
+                            {% if entry.user.get_full_name %}
+                                {{ entry.user.get_full_name }}
+                            {% else %}
+                                {{ entry.user }}
+                            {% endif %}
+                        </p>
                         <p>{{ entry.content|linebreaks|truncatechars:120 }}</p>
                         <p><a href='{{ entry.get_absolute_url }}' class="btn btn-sm btn-success" role="button">View Detail</a></p>
-                        <p><small>id:{{ entry.id }}</small></p>
                     </div> <!-- /caption -->
                 </div> <!-- / thumbnail -->
             {% endfor %}
