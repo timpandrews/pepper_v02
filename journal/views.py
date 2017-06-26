@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
 from journal.forms import JournalForm
@@ -14,6 +14,8 @@ def home(request):
     return render(request, "home.html", context)
 
 def journal_create(request):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
     form = JournalForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -57,6 +59,8 @@ def journal_list(request):
     return render(request, "journal.html", context)
 
 def journal_update(request, slug=None):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
     entry = get_object_or_404(Journal, slug=slug)
     form = JournalForm(request.POST or None, request.FILES or None, instance=entry)
     if form.is_valid():
@@ -73,6 +77,8 @@ def journal_update(request, slug=None):
     return render(request, "journal_form.html", context)
 
 def journal_delete(request, slug=None):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
     entry = get_object_or_404(Journal, slug=slug)
     entry.delete()
     messages.success(request, "Successfully Deleted" )

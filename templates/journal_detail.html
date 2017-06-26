@@ -23,9 +23,11 @@
                 <i class="fa fa-twitter" aria-hidden="true"></i> Tweet
             </a>
 
-            <hr>
-            <a class="btn btn-success" href='{% url "journal:update" slug=entry.slug %}'><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-            <a class="btn btn-success" href='{% url "journal:delete" slug=entry.slug %}'><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+            {% if user.is_authenticated %}
+                <hr>
+                <a class="btn btn-success" href='{% url "journal:update" slug=entry.slug %}'><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                <a class="btn btn-success" href='{% url "journal:delete" slug=entry.slug %}'><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+            {% endif %}
 
             <hr>
             <a href='{% url "journal:journal" %}'>Return to List</a>
