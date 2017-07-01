@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 
 from journal.forms import JournalForm
 from journal.models import Journal
@@ -32,14 +33,20 @@ def journal_create(request):
 
 def journal_detail(request, slug=None):
     entry = get_object_or_404(Journal, slug=slug)
+    today = timezone.now().date
     context = {
         'entry': entry,
-        'title': entry.title
+        'title': entry.title,
+        'today': today,
     }
     return render(request, "journal_detail.html", context)
 
 def journal_list(request):
-    qs_list = Journal.objects.all().order_by('-createTS')
+    if request.user.is_superuser:
+        qs_list = Journal.objects.all().order_by('-createTS')
+    else:
+        # active() = Custom model manager in models.py
+        qs_list = Journal.objects.active().order_by('-createTS')
     paginator = Paginator(qs_list, 3)
 
     page = request.GET.get('page')
@@ -52,9 +59,12 @@ def journal_list(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         qs = paginator.page(paginator.num_pages)
 
+    today = timezone.now().date
+
     context = {
         'journal': qs,
-        'title': 'list'
+        'title': 'list',
+        'today': today,
     }
     return render(request, "journal.html", context)
 

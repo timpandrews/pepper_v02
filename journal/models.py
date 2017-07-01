@@ -2,7 +2,14 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
+from django.utils import timezone
 from django.utils.text import slugify
+
+
+class JournalManager(models.Manager):
+    def active(self, *args, **kwargs):
+        return super(JournalManager, self).filter(draft=False).filter(publish__lte=timezone.now())
+
 
 # TODO: Make this work
 # def upload_location(instance, filename):
@@ -14,8 +21,12 @@ class Journal(models.Model):
     slug = models.SlugField(unique=True)
     badge = models.FileField(null=True, blank=True) #TODO ImageField, width_field, height_field
     content = models.TextField()
+    draft = models.BooleanField(default=False)
+    publish = models.DateField(auto_now=False, auto_now_add=False)
     createTS = models.DateTimeField(auto_now=False, auto_now_add=True)
     updateTS = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    objects = JournalManager()
 
     def __str__(self):
         return self.title

@@ -15,7 +15,13 @@
             {% endif %}
             <h3>
                 {{ entry.title }}
-                <small>{{ entry.createTS }}(id:{{entry.id }})</small>
+                {% if entry.draft %}
+                    <i class="fa fa-pencil-square draft" title="Draft Journal Entry" aria-hidden="true"></i>
+                {% endif %}
+                {% if entry.publish > today %}
+                    <i class="fa fa-calendar future" title="Future Journal Entry" aria-hidden="true"></i>
+                {% endif %}
+                <small>{{ entry.publish }} (id:{{entry.id }})</small>
             </h3>
             <p>
                 Author:

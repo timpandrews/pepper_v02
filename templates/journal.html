@@ -17,9 +17,15 @@
                         <img src='{{ entry.badge.url }}' class='img-responsive' />
                     {% endif %}
                     <div class="caption">
+                        {% if entry.draft %}
+                            <i class="fa fa-pencil-square fa-2x draft" title="Draft Journal Entry" aria-hidden="true"></i>
+                        {% endif %}
+                        {% if entry.publish > today %}
+                            <i class="fa fa-calendar fa-2x future" title="Future Journal Entry" aria-hidden="true"></i>
+                        {% endif %}
                         <h3>
                             <b><a href='{{ entry.get_absolute_url }}'>{{ entry.title }}</a></b>
-                            <small>{{ entry.createTS|timesince }} ago (id:{{ entry.id }})</small>
+                            <small>{{ entry.publish|timesince }} ago (id:{{ entry.id }})</small>
                         </h3>
                         <p>
                             Author:

@@ -22,6 +22,14 @@
 .center {
     text-align: center;
 }
+/* Journal */
+.draft {
+    color: red;
+}
+
+.future {
+    color: mediumpurple;
+}
 
 /* Landing Page - Pricing Section */
 .amount {

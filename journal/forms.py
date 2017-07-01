@@ -8,5 +8,7 @@ class JournalForm(forms.ModelForm):
         fields = [
             "title",
             "content",
-            "badge"
+            "badge",
+            "draft",
+            "publish",
         ]
