@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -47,8 +48,17 @@ def journal_list(request):
     else:
         # active() = Custom model manager in models.py
         qs_list = Journal.objects.active().order_by('-createTS')
-    paginator = Paginator(qs_list, 3)
 
+    query = request.GET.get("q")
+    if query:
+        qs_list = qs_list.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(user__first_name__icontains=query) |
+            Q(user__last_name__icontains=query)
+        ).distinct()
+
+    paginator = Paginator(qs_list, 3)
     page = request.GET.get('page')
     try:
         qs = paginator.page(page)
