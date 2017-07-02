@@ -11,6 +11,5 @@ gen
 /static_root/
 /media_root/
 /db.sqlite3
-
-
 db.sqlite3
+local_settings.py
