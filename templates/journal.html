@@ -10,9 +10,16 @@
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <form method='GET' action=''>
-                <input type='text' placeholder='Search Journal' name="q" value="{{ request.GET.q }}">
-                <input type="submit" value="Search" class="btn btn-success btn-xs">
+                <div class="input-group">
+                    <input class="form-control" type='text' placeholder='Search Journal' name="q" value="{{ request.GET.q }}">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </span>
+                </div>
             </form>
+
 
             <h1>Garden Journal</h1>
 

@@ -13,3 +13,4 @@ gen
 /db.sqlite3
 db.sqlite3
 local_settings.py
+/webfaction/
