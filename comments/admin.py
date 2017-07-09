@@ -5,7 +5,7 @@ from comments.models import Comment
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'journal', 'createTS', 'updateTS']
+    list_display = ['id', 'user', 'createTS', 'updateTS']
     list_display_links = ['id', 'user']
     class Meta:
         model = Comment
