@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
@@ -37,8 +36,8 @@ def journal_create(request):
 def journal_detail(request, slug=None):
     entry = get_object_or_404(Journal, slug=slug)
     today = timezone.now().date
-    content_type = ContentType.objects.get_for_model(Journal)
-    comments = Comment.objects.filter(content_type=content_type, object_id=entry.id)
+
+    comments = Comment.objects.filter_by_instance(entry)
 
     context = {
         'entry': entry,
