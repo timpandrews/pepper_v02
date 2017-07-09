@@ -57,9 +57,12 @@
                 <a href='{% url "journal:journal" %}'>Return to List</a>
             </p>
 
-            <!-- Facebook comments plugin -->
-            <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
-
+            <div>
+                {{ entry.comment_set.all }}
+            </div>
+            <!-- Facebook comments plugin
+            <div class="fb-comments" data-href="{ { request.build_absolute_uri }}" data-numposts="5"></div>
+            -->
 
 
         </div> <!-- /col -->
