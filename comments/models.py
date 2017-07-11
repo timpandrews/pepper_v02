@@ -19,7 +19,7 @@ class Comment(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    comment = models.TextField()
+    content = models.TextField()
     createTS = models.DateTimeField(auto_now=False, auto_now_add=True)
     updateTS = models.DateTimeField(auto_now=True, auto_now_add=False)
 

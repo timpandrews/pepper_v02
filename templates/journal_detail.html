@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block title %} | Garden Journal{% endblock %}
@@ -57,9 +58,14 @@
 
             <div>
                 <p class='lead'>Comments</p>
+                <form method="POST" action=".">
+                    {% csrf_token %}
+                    {{ comment_form|crispy }}
+                    <input type='submit' value='Comment' class='btn btn-success'>
+                </form>
                 {% for comment in comments %}
                     <blockquote>
-                        <p>{{ comment.comment }}</p>
+                        <p>{{ comment.content }}</p>
                         <footer>via {{ comment.user }} | {{ comment.createTS|timesince }} ago</footer>
                     </blockquote>
                     <hr/>
