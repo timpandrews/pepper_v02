@@ -38,7 +38,7 @@ def journal_create(request):
 def journal_detail(request, slug=None):
     entry = get_object_or_404(Journal, slug=slug)
     today = timezone.now().date
-    comments = Comment.objects.filter_by_instance(entry)
+    comments = Comment.objects.filter_by_instance(entry).order_by('-createTS')
 
     # Initial values for hidden fields in comment form
     initial_data = {
@@ -59,6 +59,7 @@ def journal_detail(request, slug=None):
             object_id=obj_id,
             content=content_data
         )
+        return HttpResponseRedirect(entry.get_absolute_url())
 
     context = {
         'entry': entry,
