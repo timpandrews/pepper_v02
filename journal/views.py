@@ -1,10 +1,13 @@
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
+from comments.forms import CommentForm
+from comments.models import Comment
 from journal.forms import JournalForm
 from journal.models import Journal
 
@@ -35,10 +38,35 @@ def journal_create(request):
 def journal_detail(request, slug=None):
     entry = get_object_or_404(Journal, slug=slug)
     today = timezone.now().date
+    comments = Comment.objects.filter_by_instance(entry).order_by('-createTS')
+
+    # Initial values for hidden fields in comment form
+    initial_data = {
+        "content_type": entry.get_content_type,
+        "object_id": entry.id
+ 	}
+
+    comment_form = CommentForm(request.POST or None, initial=initial_data)
+
+    if comment_form.is_valid():
+        c_type = comment_form.cleaned_data.get("content_type")
+        content_type = ContentType.objects.get(model=c_type)
+        obj_id = comment_form.cleaned_data.get('object_id')
+        content_data = comment_form.cleaned_data.get("content")
+        new_comment, created = Comment.objects.get_or_create(
+            user=request.user,
+            content_type=content_type,
+            object_id=obj_id,
+            content=content_data
+        )
+        return HttpResponseRedirect(entry.get_absolute_url())
+
     context = {
         'entry': entry,
         'title': entry.title,
         'today': today,
+        'comments': comments,
+        'comment_form': comment_form,
     }
     return render(request, "journal_detail.html", context)
 

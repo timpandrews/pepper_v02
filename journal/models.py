@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils import timezone
@@ -33,6 +34,11 @@ class Journal(models.Model):
 
     def get_absolute_url(self):
         return reverse("journal:detail", kwargs={"slug": self.slug})
+
+    @property
+    def get_content_type(self):
+        content_type = ContentType.objects.get_for_model(self.__class__)
+        return content_type
 
 
 def create_slug(instance, new_slug=None):

@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^', include("journal.urls", namespace="journal")),
+    url(r'^', include("comments.urls", namespace="comments")),
 ]
 
 if settings.DEBUG:
