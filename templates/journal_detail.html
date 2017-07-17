@@ -66,7 +66,13 @@
                 {% for comment in comments %}
                     <blockquote>
                         <p>{{ comment.content }}</p>
-                        <footer>via {{ comment.user }} | {{ comment.createTS|timesince }} ago</footer>
+                        <footer>
+                            via {{ comment.user }} |
+                            {{ comment.createTS|timesince }} ago
+                            {% if user == comment.user %}
+                                | <a class="btn btn-xs btn-default" href="{% url 'comments:delete' id=comment.id %}"><i class="fa fa-trash" aria-hidden="true"></i> Delete Comment</a>
+                            {% endif %}
+                        </footer>
                     </blockquote>
                     <hr/>
                 {% endfor %}
