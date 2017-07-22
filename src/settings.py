@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGIN_URL = "/page1/"
 ROOT_URLCONF = 'src.urls'
 
 TEMPLATES = [

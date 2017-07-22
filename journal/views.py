@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404
@@ -18,6 +19,7 @@ def home(request):
     }
     return render(request, "home.html", context)
 
+@login_required()
 def journal_create(request):
     if not request.user.is_authenticated:
         raise Http404
@@ -106,6 +108,7 @@ def journal_list(request):
     }
     return render(request, "journal.html", context)
 
+@login_required()
 def journal_update(request, slug=None):
     if not request.user.is_authenticated:
         raise Http404
@@ -124,6 +127,7 @@ def journal_update(request, slug=None):
     }
     return render(request, "journal_form.html", context)
 
+@login_required()
 def journal_delete(request, slug=None):
     if not request.user.is_authenticated:
         raise Http404
