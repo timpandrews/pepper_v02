@@ -20,11 +20,13 @@
                 <li><a href='/admin'>Admin</a></li> <!-- TODO: Remove from prod -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                {% if not request.user_is_authenticated %}
-                    <li><a href="">Register</a></li>
-                    <li><a href="">Login</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a href="/accounts/signup">Register</a></li>
+                    <li><a href="/accounts/login">Login</a></li>
                 {% else %}
-                    <li><a href="">Logout</a></li>
+                    <!-- TODO Add link to profile page -->
+                    <li class="welcome_user" ><a href="">Welcome {{ user }}</a></li>
+                    <li><a href="/accounts/logout">Logout</a></li>
                 {% endif %}
             </ul>
         </div><!--/.nav-collapse -->

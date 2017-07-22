@@ -5,6 +5,11 @@
     font-weight: 400;
 }
 
+.welcome_user {
+    font-weight: bold;
+    color: #6600ff; !important;
+}
+
 /* Jumbotron */
 .jumbotron {
     background-color: #3fb53f;
@@ -42,7 +47,7 @@
     height: 325px;
 }
 
-.btn-pricing{
+.btn-pricing {
     position: absolute;
     bottom:0;
 }

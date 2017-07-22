@@ -30,15 +30,30 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
+# Email Settings
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'gardenshare@sandbox742b97f1363d4b31a3d2bc8b2ba8f12c.mailgun.org'
+EMAIL_FROM = 'gardenshare@sandbox742b97f1363d4b31a3d2bc8b2ba8f12c.mailgun.org'
+EMAIL_HOST_PASSWORD = 'pJ4G9%eKLk$4U6JG'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+'''
+from django.conf import settings
+from django.core.mail import send_mail
+
+send_mail("subject", "message", settings.EMAIL_FROM, ["timpandrews@yahoo.com"], fail_silently=False)
+'''
+
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 
     # Local Apps
@@ -46,8 +61,23 @@ INSTALLED_APPS = [
     'journal',
 
     # 3rd Party Apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
     'crispy_forms',
 ]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,6 +89,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGIN_URL = "/page1/"
 ROOT_URLCONF = 'src.urls'
 
 TEMPLATES = [
@@ -132,7 +163,40 @@ MEDIA_URL = '/media/'
 # MEDIA_ROOT in local
 
 # 3rd Party App Configuration
+# Crispy Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# AllAuth Settings
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+LOGIN_REDIRECT_URL = "/"
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time',
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERIFIED_EMAIL': True,
+        'VERSION': 'v2.4',
+    }
+}
 
 
 # Get Local Settings from local_settings.py
