@@ -64,6 +64,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
     'crispy_forms',
 ]
 
@@ -76,11 +78,6 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-# AllAuth Settings
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-LOGIN_REDIRECT_URL = "/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -166,7 +163,40 @@ MEDIA_URL = '/media/'
 # MEDIA_ROOT in local
 
 # 3rd Party App Configuration
+# Crispy Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# AllAuth Settings
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+LOGIN_REDIRECT_URL = "/"
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time',
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERIFIED_EMAIL': True,
+        'VERSION': 'v2.4',
+    }
+}
 
 
 # Get Local Settings from local_settings.py

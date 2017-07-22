@@ -11,10 +11,12 @@
         <p>Garden Share lets you track all you gardening success (and failures) and if you like you can share your gardening experience with your friends and followers.</p>
         <p class="center">
             <a class="btn btn-lg btn-default" href="#features" role="button">Learn More &raquo;</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <a class="btn btn-lg btn-default" href="{% url "journal:page1" %}" role="button">Sing Up</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <a class="btn btn-lg btn-default" href="{% url "journal:page1" %}" role="button">Login</a>
+            {% if not user.is_authenticated %}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-lg btn-default" href="/accounts/signup" role="button">Sing Up</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-lg btn-default" href="/accounts/login" role="button">Login</a>
+            {% endif %}
         </p>
     </div>
 {% endblock %}
