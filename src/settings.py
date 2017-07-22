@@ -30,15 +30,30 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
+# Email Settings
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'gardenshare@sandbox742b97f1363d4b31a3d2bc8b2ba8f12c.mailgun.org'
+EMAIL_FROM = 'gardenshare@sandbox742b97f1363d4b31a3d2bc8b2ba8f12c.mailgun.org'
+EMAIL_HOST_PASSWORD = 'pJ4G9%eKLk$4U6JG'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+'''
+from django.conf import settings
+from django.core.mail import send_mail
+
+send_mail("subject", "message", settings.EMAIL_FROM, ["timpandrews@yahoo.com"], fail_silently=False)
+'''
+
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 
     # Local Apps
@@ -46,8 +61,24 @@ INSTALLED_APPS = [
     'journal',
 
     # 3rd Party Apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'crispy_forms',
 ]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
