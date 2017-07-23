@@ -21,17 +21,23 @@
 
     {% include '_messages.html' %}
 
-    <div class="container">
+    <div id="wrapper" class="container">
 
-        {% include '_navbar.html' %}
+        <div id="header">
+            {% include '_navbar.html' %}
+        </div>
 
-        {% block jumbotron %}
-        {% endblock %}
+        <div id="content">
+            {% block jumbotron %}
+            {% endblock %}
 
-        {% block content %}
-        {% endblock %}
+            {% block content %}
+            {% endblock %}
+        </div>
 
-        {% include '_footer.html' %}
+        <div id="footer">
+            {% include '_footer.html' %}
+        </div>
 
     </div> <!-- /container -->
 
