@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^', include("journal.urls", namespace="journal")),
     url(r'^', include("comments.urls", namespace="comments")),
 ]

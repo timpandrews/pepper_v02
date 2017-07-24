@@ -13,6 +13,7 @@
             <h1>Garden Journal</h1>
 
             <form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
+                {{ form.media }}
                 {{ form | crispy }}
                 {% if 'edit' in request.get_full_path %}
                     <input type='submit' value='Update' class="btn btn-success"/>

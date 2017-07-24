@@ -66,6 +66,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
 
+    'ckeditor',
+    'ckeditor_uploader',
+
     'crispy_forms',
 ]
 
@@ -197,6 +200,9 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERSION': 'v2.4',
     }
 }
+
+# ckeditor settings
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
 # Get Local Settings from local_settings.py
