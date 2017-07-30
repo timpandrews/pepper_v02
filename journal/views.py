@@ -39,6 +39,7 @@ def journal_create(request):
     return render(request, "journal_form.html", context)
 
 
+@login_required()
 def journal_detail(request, slug=None):
     entry = get_object_or_404(Journal, slug=slug)
     today = timezone.now().date
@@ -75,12 +76,18 @@ def journal_detail(request, slug=None):
     return render(request, "journal_detail.html", context)
 
 
+@login_required()
 def journal_list(request):
     if request.user.is_superuser:
         qs_list = Journal.objects.all().order_by('-createTS')
     else:
         # active() = Custom model manager in models.py
         qs_list = Journal.objects.active().order_by('-createTS')
+
+    ## Filter Journals
+    # - Show user only their own journals
+    # TODO: filter by following
+    qs_list = qs_list.filter(user=request.user)
 
     query = request.GET.get("q")
     if query:

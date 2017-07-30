@@ -17,16 +17,15 @@
                 {{ form | crispy }}
                 {% if 'edit' in request.get_full_path %}
                     <input type='submit' value='Update' class="btn btn-success"/>
-                    <a href='{{ entry.get_absolute_url }}' class="btn btn-success" role="button">Cancel</a>
+                    <a class="btn btn-default" href='{{ entry.get_absolute_url }}'>Cancel</a>
                 {% else %}
                     <input type='submit' value='Create' class="btn btn-success"/>
-                    <a href='{% url "journal:journal" %}' class="btn btn-success" role="button">Return</a>
+                    <a class="btn btn-default" href='{% url "journal:journal" %}'>Cancel</a>
                 {% endif %}
             </form>
 
             <hr>
-
-            <a href='{% url "journal:journal" %}'>Return to List</a>
+            <a class="btn btn-default" href='{% url "journal:journal" %}'><i class="fa fa-arrow-left" aria-hidden="true"></i> Return to Journal</a>
         </div> <!-- /col -->
     </div> <!-- /row -->
 

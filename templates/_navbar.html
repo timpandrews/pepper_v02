@@ -14,11 +14,13 @@
             <a href='{% url "home" %}'><img class="logo_nav" src="{% static "img/gardenShare_logo.png" %}"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li {# class="active" #}><a href='{% url "home" %}'>Home</a></li>
-                <li><a href='{% url "journal:journal" %}'>Garden Journal</a></li>
-                <li><a href='/admin'>Admin</a></li> <!-- TODO: Remove from prod -->
-            </ul>
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav">
+                    <li {# class="active" #}><a href='{% url "home" %}'>Home</a></li>
+                    <li><a href='{% url "journal:journal" %}'>Garden Journal</a></li>
+                    <li><a href='/admin'>Admin</a></li> <!-- TODO: Remove from prod -->
+                </ul>
+            {% endif %}
             <ul class="nav navbar-nav navbar-right">
                 {% if not user.is_authenticated %}
                     <li><a href="/accounts/signup">Register</a></li>
