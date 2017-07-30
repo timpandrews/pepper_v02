@@ -19,6 +19,7 @@ def home(request):
     }
     return render(request, "home.html", context)
 
+
 @login_required()
 def journal_create(request):
     if not request.user.is_authenticated:
@@ -36,6 +37,7 @@ def journal_create(request):
         "form": form,
     }
     return render(request, "journal_form.html", context)
+
 
 def journal_detail(request, slug=None):
     entry = get_object_or_404(Journal, slug=slug)
@@ -71,6 +73,7 @@ def journal_detail(request, slug=None):
         'comment_form': comment_form,
     }
     return render(request, "journal_detail.html", context)
+
 
 def journal_list(request):
     if request.user.is_superuser:
@@ -108,6 +111,7 @@ def journal_list(request):
     }
     return render(request, "journal.html", context)
 
+
 @login_required()
 def journal_update(request, slug=None):
     if not request.user.is_authenticated:
@@ -127,6 +131,7 @@ def journal_update(request, slug=None):
     }
     return render(request, "journal_form.html", context)
 
+
 @login_required()
 def journal_delete(request, slug=None):
     if not request.user.is_authenticated:
@@ -135,6 +140,7 @@ def journal_delete(request, slug=None):
     entry.delete()
     messages.success(request, "Successfully Deleted" )
     return redirect('journal:journal')
+
 
 def page1(request):
     context = {

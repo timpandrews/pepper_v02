@@ -76,7 +76,9 @@
             </div>
 
             <hr>
-            <a class="btn btn-success" href='{% url "journal:create" %}'><i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
+            {% if user.is_authenticated %}
+                <a class="btn btn-success" href='{% url "journal:create" %}'><i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
+            {% endif %}
         </div> <!-- /col -->
     </div> <!-- /row -->
 {% endblock %}

@@ -92,7 +92,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-LOGIN_URL = "/page1/"
+LOGIN_URL = "/accounts/login/"
 ROOT_URLCONF = 'src.urls'
 
 TEMPLATES = [
