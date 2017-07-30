@@ -26,10 +26,11 @@ def get_upload_filename(upload_name, user):
     # If CKEDITOR_RESTRICT_BY_USER is True upload file to user specific path.
     RESTRICT_BY_USER = getattr(settings, 'CKEDITOR_RESTRICT_BY_USER', False)
     if RESTRICT_BY_USER:
-        try:
-            user_prop = getattr(user, RESTRICT_BY_USER)
-        except AttributeError:
-            user_prop = getattr(user, 'get_username')
+        # try:
+        #     user_prop = getattr(user, RESTRICT_BY_USER)
+        # except AttributeError:
+        #     user_prop = getattr(user, 'get_username')
+        user_prop = user.get_username()
 
         if callable(user_prop):
             user_path = user_prop()
