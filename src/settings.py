@@ -202,7 +202,9 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # ckeditor settings
-CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_UPLOAD_PATH = "user_images/"
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_BROWSE_SHOW_DIRS = True
 
 
 # Get Local Settings from local_settings.py
