@@ -6,7 +6,7 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.text import slugify
 
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class JournalManager(models.Manager):
@@ -23,7 +23,7 @@ class Journal(models.Model):
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
     badge = models.FileField(null=True, blank=True) #TODO ImageField, width_field, height_field
-    content = RichTextField()
+    content = RichTextUploadingField()
     draft = models.BooleanField(default=False)
     publish = models.DateField(auto_now=False, auto_now_add=False)
     createTS = models.DateTimeField(auto_now=False, auto_now_add=True)
