@@ -1,8 +1,13 @@
 /* Navbar */
 .navbar-default .navbar-nav>li>a {
     margin-top: 8px;
-    color: #188610; !important;
+    color: #188610 !important;
     font-weight: 400;
+}
+
+.welcome_user {
+    font-weight: bold;
+    color: #6600ff !important;
 }
 
 /* Jumbotron */
@@ -31,6 +36,12 @@
     color: mediumpurple;
 }
 
+.journal_content {
+    background-color: rgba(23, 132, 16, 0.10);
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
 /* Landing Page - Pricing Section */
 .amount {
     font-size: xx-large;
@@ -42,7 +53,7 @@
     height: 325px;
 }
 
-.btn-pricing{
+.btn-pricing {
     position: absolute;
     bottom:0;
 }
@@ -50,5 +61,38 @@
 /* Footer */
 .footer {
     color: #6600ff;
+}
+
+
+/**
+ * CSSReset.com - How To Keep Footer At Bottom of Page with CSS
+ *
+ * Original Tutorial: http://www.cssreset.com/2010/css-tutorials/how-to-keep-footer-at-bottom-of-page-with-css/
+ * License: Free - do whatever you like with it! Credit and linkbacks much appreciated.
+ *
+ * NB: Make sure the value for 'padding-bottom' on #content is equal to or greater than the height of #footer.
+ */
+html,
+body {
+	margin:0;
+	padding:0;
+	height:100%;
+}
+#wrapper {
+	min-height:100%;
+	position:relative;
+}
+#header {
+	padding:10px;
+}
+#content {
+	padding-bottom:100px; /* Height of the footer element */
+}
+#footer {
+	width:100%;
+	height:100px;
+	position:absolute;
+	bottom:0;
+	left:0;
 }
 

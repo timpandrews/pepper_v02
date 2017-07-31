@@ -17,7 +17,12 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
+
 from journal.views import home
+
+from ckeditor_uploader import views
 
 urlpatterns = [
     url(r'^$', home, name='home'),
@@ -26,6 +31,12 @@ urlpatterns = [
     url(r'^', include("journal.urls", namespace="journal")),
     url(r'^', include("comments.urls", namespace="comments")),
 ]
+
+# urlpatterns for ckeditor
+urlpatterns += [
+        url(r'^upload/', login_required(views.upload), name='ckeditor_upload'),
+        url(r'^browse/', never_cache(login_required(views.browse)), name='ckeditor_browse'),
+    ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

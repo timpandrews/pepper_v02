@@ -66,6 +66,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
 
+    'ckeditor',
+    'ckeditor_uploader',
+
     'crispy_forms',
 ]
 
@@ -89,7 +92,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-LOGIN_URL = "/page1/"
+LOGIN_URL = "/accounts/login/"
 ROOT_URLCONF = 'src.urls'
 
 TEMPLATES = [
@@ -197,6 +200,11 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERSION': 'v2.4',
     }
 }
+
+# ckeditor settings
+CKEDITOR_UPLOAD_PATH = "user_images/"
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_BROWSE_SHOW_DIRS = True
 
 
 # Get Local Settings from local_settings.py

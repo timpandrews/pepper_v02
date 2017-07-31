@@ -47,7 +47,9 @@
                                 {{ entry.user }}
                             {% endif %}
                         </p>
-                        <p>{{ entry.content|linebreaks|truncatechars:120 }}</p>
+                        <div class="journal_content">
+                            <p>{{ entry.content | safe }}</p>
+                        </div>
                         <p><a href='{{ entry.get_absolute_url }}' class="btn btn-sm btn-success" role="button">View Detail</a></p>
                     </div> <!-- /caption -->
                 </div> <!-- / thumbnail -->
@@ -74,7 +76,9 @@
             </div>
 
             <hr>
-            <a class="btn btn-success" href='{% url "journal:create" %}'><i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
+            {% if user.is_authenticated %}
+                <a class="btn btn-success" href='{% url "journal:create" %}'><i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
+            {% endif %}
         </div> <!-- /col -->
     </div> <!-- /row -->
 {% endblock %}

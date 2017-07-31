@@ -1,13 +1,13 @@
 /* Navbar */
 .navbar-default .navbar-nav>li>a {
     margin-top: 8px;
-    color: #188610; !important;
+    color: #188610 !important;
     font-weight: 400;
 }
 
 .welcome_user {
     font-weight: bold;
-    color: #6600ff; !important;
+    color: #6600ff !important;
 }
 
 /* Jumbotron */
@@ -34,6 +34,12 @@
 
 .future {
     color: mediumpurple;
+}
+
+.journal_content {
+    background-color: rgba(23, 132, 16, 0.10);
+    padding: 10px;
+    margin-bottom: 5px;
 }
 
 /* Landing Page - Pricing Section */

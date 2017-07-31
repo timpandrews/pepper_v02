@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
+import datetime
+
 from comments.forms import CommentForm
 from comments.models import Comment
 from journal.forms import JournalForm
@@ -19,11 +21,16 @@ def home(request):
     }
     return render(request, "home.html", context)
 
+
 @login_required()
 def journal_create(request):
     if not request.user.is_authenticated:
         raise Http404
-    form = JournalForm(request.POST or None, request.FILES or None)
+    form = JournalForm(
+        request.POST or None,
+        request.FILES or None,
+        initial={'publish': datetime.date.today()}
+    )
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user = request.user
@@ -37,6 +44,8 @@ def journal_create(request):
     }
     return render(request, "journal_form.html", context)
 
+
+@login_required()
 def journal_detail(request, slug=None):
     entry = get_object_or_404(Journal, slug=slug)
     today = timezone.now().date
@@ -72,12 +81,19 @@ def journal_detail(request, slug=None):
     }
     return render(request, "journal_detail.html", context)
 
+
+@login_required()
 def journal_list(request):
     if request.user.is_superuser:
         qs_list = Journal.objects.all().order_by('-createTS')
     else:
         # active() = Custom model manager in models.py
         qs_list = Journal.objects.active().order_by('-createTS')
+
+    ## Filter Journals
+    # - Show user only their own journals
+    # TODO: filter by following
+    qs_list = qs_list.filter(user=request.user)
 
     query = request.GET.get("q")
     if query:
@@ -108,6 +124,7 @@ def journal_list(request):
     }
     return render(request, "journal.html", context)
 
+
 @login_required()
 def journal_update(request, slug=None):
     if not request.user.is_authenticated:
@@ -127,6 +144,7 @@ def journal_update(request, slug=None):
     }
     return render(request, "journal_form.html", context)
 
+
 @login_required()
 def journal_delete(request, slug=None):
     if not request.user.is_authenticated:
@@ -135,6 +153,7 @@ def journal_delete(request, slug=None):
     entry.delete()
     messages.success(request, "Successfully Deleted" )
     return redirect('journal:journal')
+
 
 def page1(request):
     context = {
