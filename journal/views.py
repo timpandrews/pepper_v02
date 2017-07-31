@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
+import datetime
+
 from comments.forms import CommentForm
 from comments.models import Comment
 from journal.forms import JournalForm
@@ -24,7 +26,11 @@ def home(request):
 def journal_create(request):
     if not request.user.is_authenticated:
         raise Http404
-    form = JournalForm(request.POST or None, request.FILES or None)
+    form = JournalForm(
+        request.POST or None,
+        request.FILES or None,
+        initial={'publish': datetime.date.today()}
+    )
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user = request.user
