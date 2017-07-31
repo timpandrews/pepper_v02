@@ -6,7 +6,6 @@ from journal.views import (
     journal_detail,
     journal_list,
     journal_update,
-    page1
 )
 
 urlpatterns = [
@@ -15,5 +14,4 @@ urlpatterns = [
     url(r'^journal/(?P<slug>[\w-]+)/$', journal_detail, name='detail'),
     url(r'^journal/(?P<slug>[\w-]+)/edit/$', journal_update, name='update'),
     url(r'^journal/(?P<slug>[\w-]+)/delete/$', journal_delete, name='delete'),
-    url(r'^page1/$', page1, name='page1'),
 ]

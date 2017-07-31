@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^', include("journal.urls", namespace="journal")),
     url(r'^', include("comments.urls", namespace="comments")),
+    url(r'^', include("gardeners.urls", namespace="gardeners")),
 ]
 
 # urlpatterns for ckeditor
