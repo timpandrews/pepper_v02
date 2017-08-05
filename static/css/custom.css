@@ -27,6 +27,7 @@
 .center {
     text-align: center;
 }
+
 /* Journal */
 .draft {
     color: red;
@@ -63,6 +64,10 @@
     color: #6600ff;
 }
 
+/* Garderners */
+.following-icon {
+  color: #3fb53f;
+}
 
 /**
  * CSSReset.com - How To Keep Footer At Bottom of Page with CSS

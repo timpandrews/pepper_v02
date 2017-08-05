@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Following(models.Model):
-    user = models.OneToOneField(User, related_name='following')
+    user = models.ForeignKey(User, related_name='following')
     following = models.ForeignKey(User, related_name='followed_by')
 
     class Meta:
