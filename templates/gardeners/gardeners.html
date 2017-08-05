@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} | Gardeners{% endblock %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <h1>Gardeners</h1>
+
+            {% for gardener in gardeners_list %}
+                <div class="thumbnail">
+                    <!-- TODO: Gardern Bardge
+                    { % if gardener.badge %}
+                        <img src='{ { entry.badge.url }}' class='img-responsive' />
+                    { % endif %} -->
+                    <div class="caption">
+                        <h3>
+                            {% if gardener.get_full_name %}
+                                {{ gardener.get_full_name }}
+                            {% else %}
+                                {{ gardener }}
+                            {% endif %}
+                        </h3>
+                        <p>{{ gardener.profile.bio }}</p>
+                        <p>{{ gardener.profile.location }}</p>
+                        <p>{{ gardener.profile.birth_date }}</p>
+                        <a class="btn btn-lg btn-success" href="#" role="button">Follow &raquo;</a>
+                    </div> <!-- /caption -->
+
+            {% endfor %}
+        </div> <!-- /col -->
+    </div> <!-- /row -->
+
+{% endblock %}
