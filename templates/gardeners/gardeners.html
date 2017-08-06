@@ -31,9 +31,9 @@
                         <p>{{ gardener.profile.location }}</p>
                         <p>{{ gardener.profile.birth_date }}</p>
                         {% if gardener.id in following_list %}
-                            <a class="btn btn-default" href="{% url "gardeners:gardeners" %}?action=unfollow&user={{ request.user.id }}&target={{ gardener.id }}" role="button"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Un-Follow</a>
+                            <a class="btn btn-default btn-sm" href="{% url "gardeners:gardeners" %}?action=unfollow&user={{ request.user.id }}&target={{ gardener.id }}" role="button"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Un-Follow</a>
                         {% else %}
-                            <a class="btn btn-success" href="{% url "gardeners:gardeners" %}?action=follow&user={{ request.user.id }}&target={{ gardener.id }}" role="button">Follow <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                            <a class="btn btn-success btn-sm" href="{% url "gardeners:gardeners" %}?action=follow&user={{ request.user.id }}&target={{ gardener.id }}" role="button">Follow <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                         {% endif %}
 
 

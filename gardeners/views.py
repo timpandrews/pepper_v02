@@ -5,21 +5,15 @@ from django.shortcuts import render
 from gardeners.models import Following
 
 def gardeners_home(request):
-    print (request.POST)
-    # if 'action' in request.POST:
-    #     action = request.GET.get('action')
-    # else:
-    #     action = 'none'
+    # Get QueryString Parameters if present
     action = 'none'
     action = request.GET.get('action')
-    print ("action: ", action)
     if request.GET.get('user'):
         user_id = int(request.GET.get('user'))
-        print ("user_id: ", user_id)
     if request.GET.get('target'):
         target_id = int(request.GET.get('target'))
-        print ("target_id: ", target_id)
 
+    # Follows / Unfollow Code
     if action == "follow":
         follow = Following(user_id=user_id, following_id=target_id)
         follow.save()
@@ -29,7 +23,7 @@ def gardeners_home(request):
         unFollow.delete()
         messages.success(request, "Successfully Deleted from Following table")
 
-
+    # Build context for gardeners template
     gardeners_list = User.objects.exclude(id=request.user.id)
     following_list = Following.objects.filter(user_id=request.user.id).values_list('following_id', flat=True)
     context = {
