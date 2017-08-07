@@ -58,7 +58,9 @@ INSTALLED_APPS = [
 
     # Local Apps
     'comments',
+    'gardeners',
     'journal',
+    'profiles',
 
     # 3rd Party Apps
     'allauth',

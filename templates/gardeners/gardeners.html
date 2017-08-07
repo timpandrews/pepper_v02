@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} | Gardeners{% endblock %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <h1>Gardeners</h1>
+
+            {% for gardener in gardeners_list %}
+                <div class="thumbnail">
+                    <!-- TODO: Gardern Badge -->
+                    <div class="caption">
+                        <h3>
+                            {% if gardener.id in following_list %}
+                                <i class="following-icon fa fa-user-plus" aria-hidden="true"></i>
+                            {% endif %}
+                            {% if gardener.get_full_name %}
+                                {{ gardener.get_full_name }}
+                            {% else %}
+                                {{ gardener }}
+                            {% endif %}
+                            <small>{{ gardener.id }}</small>
+                        </h3>
+                        <p>{{ gardener.profile.bio }}</p>
+                        <p>{{ gardener.profile.location }}</p>
+                        <p>{{ gardener.profile.birth_date }}</p>
+                        {% if gardener.id in following_list %}
+                            <a class="btn btn-default btn-sm" href="{% url "gardeners:gardeners" %}?action=unfollow&user={{ request.user.id }}&target={{ gardener.id }}" role="button"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Un-Follow</a>
+                        {% else %}
+                            <a class="btn btn-success btn-sm" href="{% url "gardeners:gardeners" %}?action=follow&user={{ request.user.id }}&target={{ gardener.id }}" role="button">Follow <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                        {% endif %}
+
+
+                    </div> <!-- /caption -->
+                </div> <!-- /thumbnail -->
+
+            {% endfor %}
+        </div> <!-- /col -->
+    </div> <!-- /row -->
+
+{% endblock %}

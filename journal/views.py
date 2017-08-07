@@ -13,6 +13,7 @@ from comments.forms import CommentForm
 from comments.models import Comment
 from journal.forms import JournalForm
 from journal.models import Journal
+from gardeners.models import Following
 
 
 def home(request):
@@ -91,9 +92,21 @@ def journal_list(request):
         qs_list = Journal.objects.active().order_by('-createTS')
 
     ## Filter Journals
-    # - Show user only their own journals
-    # TODO: filter by following
-    qs_list = qs_list.filter(user=request.user)
+    # Now showing Following + myJournal
+    # TODO: allow to select form show all following, show just myJournal, or show specific journal
+    # Get list of following journals
+    following = Following.objects.filter(user=request.user)
+    following_list = []
+    for follow in following:
+        following_list.append(follow.following_id)
+
+    # Build show journal list (following + myJournal for now)
+    show_journal_list = following_list
+    show_journal_list.append(request.user.id)
+
+    print ('show_journal_list: ', show_journal_list)
+
+    qs_list = qs_list.filter(user_id__in=show_journal_list)
 
     query = request.GET.get("q")
     if query:
@@ -155,8 +168,4 @@ def journal_delete(request, slug=None):
     return redirect('journal:journal')
 
 
-def page1(request):
-    context = {
-        "title": "Page 1",
-    }
-    return render(request, "page1.html", context)
+
