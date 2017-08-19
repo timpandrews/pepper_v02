@@ -15,16 +15,9 @@ gen
 /db.sqlite3
 
 /src/local_settings.py
+/src/wsgi.py
 
 /~webfaction/
 /~edits_to_ckeditor/
 
 
-
-
-
-
-
-src/local_settings_template.py
-
-src/local_settings_template.py
