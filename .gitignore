@@ -8,12 +8,14 @@ gen
 /_env/
 *.pyc
 
-/static_root/
+
 /media_root/
 /db.sqlite3
 db.sqlite3
-/webfaction/
+/~webfaction/
+
 /src/local_settings.py
 src/local_settings.py
 local_settings.py
 src/local_settings.py
+
