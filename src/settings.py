@@ -28,6 +28,11 @@ SECRET_KEY = '8_p#@-krvuzy(exdf7rpro@1vv*%k)3akqonee6uig@th_&ec@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+ADMINS = [
+    ('Tim Andrews', 'timpandrews@yahoo.com'),
+    ('GardenBench Admin', 'timpandrews@yahoo.com'),
+]
+
 ALLOWED_HOSTS = []
 
 # Email Settings
