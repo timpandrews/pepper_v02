@@ -14,5 +14,5 @@ DATABASES = {
 }
 
 
-STATIC_ROOT = '/Users/timandrews/Desktop/apps/pepper_v02/static_root'
-MEDIA_ROOT = '/Users/timandrews/Desktop/apps/pepper_v02/media_root'
+STATIC_ROOT = '/Users/timandrews/Desktop/apps/pepper_v02/_static_root'
+MEDIA_ROOT = '/Users/timandrews/Desktop/apps/pepper_v02/_media_root'
