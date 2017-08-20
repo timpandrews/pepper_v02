@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^', include("journal.urls", namespace="journal")),
+    url(r'^api/journal/', include("journal.api.urls", namespace="journal-api")),
     url(r'^', include("comments.urls", namespace="comments")),
     url(r'^', include("gardeners.urls", namespace="gardeners")),
 ]

@@ -69,11 +69,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-
     'ckeditor',
     'ckeditor_uploader',
-
     'crispy_forms',
+    'rest_framework',
 ]
 
 SITE_ID = 1
