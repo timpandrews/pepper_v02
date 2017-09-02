@@ -12,6 +12,10 @@ from rest_framework.generics import (
     RetrieveUpdateAPIView,
     UpdateAPIView,
 )
+from rest_framework.pagination import (
+    LimitOffsetPagination,
+    PageNumberPagination,
+)
 from rest_framework.permissions import (
     AllowAny,
     IsAdminUser,
@@ -20,6 +24,10 @@ from rest_framework.permissions import (
 )
 
 from journal.models import Journal
+from journal.api.pagination import (
+    JournalLimitOffsetPagination,
+    JournalPageNumberPagination,
+)
 from journal.api.permissions import IsOwnerOrReadOnly
 from journal.api.serializers import (
     JournalCreateUpdateSerializer,
@@ -40,12 +48,14 @@ class JournalCreateAPIView(CreateAPIView):
 class JournalDeleteAPIView_by_id(DestroyAPIView):
     queryset = Journal.objects.all()
     serializer_class = JournalDetailSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 class JournalDeleteAPIView_by_slug(DestroyAPIView):
     queryset = Journal.objects.all()
     serializer_class = JournalDetailSerializer
     lookup_field = 'slug'
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 class JournalDetailAPIView_by_id(RetrieveAPIView):
@@ -68,6 +78,7 @@ class JournalListAPIView(ListAPIView):
         'user__first_name',
         'user__last_name',
     ]
+    pagination_class = JournalPageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
         qs_list = Journal.objects.all()
