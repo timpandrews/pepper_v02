@@ -1,6 +1,7 @@
 from rest_framework.serializers import (
-    ModelSerializer,
     HyperlinkedIdentityField,
+    ModelSerializer,
+    SerializerMethodField,
 )
 
 journal_detail_url = HyperlinkedIdentityField(view_name='journal-api:detail')
@@ -24,6 +25,7 @@ class JournalCreateUpdateSerializer(ModelSerializer):
 class JournalDetailSerializer(ModelSerializer):
     # update_url = journal_update_url
     # delete_url = journal_delete_url
+    user = SerializerMethodField()
     class Meta:
         model = Journal
         fields = [
@@ -40,11 +42,15 @@ class JournalDetailSerializer(ModelSerializer):
             # 'delete_url',
         ]
 
+    def get_user(self, obj):
+        return str(obj.user.username)
+
 
 class JournalListSerializer(ModelSerializer):
     url = journal_detail_url
     # update_url = journal_update_url
     # delete_url = journal_delete_url
+    user = SerializerMethodField()
     class Meta:
         model = Journal
         fields = [
@@ -61,5 +67,8 @@ class JournalListSerializer(ModelSerializer):
             # 'update_url',
             # 'delete_url',
         ]
+
+    def get_user(self, obj):
+        return str(obj.user.username)
 
 
