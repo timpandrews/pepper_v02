@@ -1,4 +1,11 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import (
+    ModelSerializer,
+    HyperlinkedIdentityField,
+)
+
+journal_detail_url = HyperlinkedIdentityField(view_name='journal-api:detail')
+journal_delete_url = HyperlinkedIdentityField(view_name='journal-api:delete')
+journal_update_url = HyperlinkedIdentityField(view_name='journal-api:update')
 
 from journal.models import Journal
 
@@ -15,6 +22,8 @@ class JournalCreateUpdateSerializer(ModelSerializer):
 
 
 class JournalDetailSerializer(ModelSerializer):
+    # update_url = journal_update_url
+    # delete_url = journal_delete_url
     class Meta:
         model = Journal
         fields = [
@@ -27,13 +36,19 @@ class JournalDetailSerializer(ModelSerializer):
             'publish',
             'createTS',
             'updateTS',
+            # 'update_url',
+            # 'delete_url',
         ]
 
 
 class JournalListSerializer(ModelSerializer):
+    url = journal_detail_url
+    # update_url = journal_update_url
+    # delete_url = journal_delete_url
     class Meta:
         model = Journal
         fields = [
+            'url',
             'id',
             'user',
             'title',
@@ -43,6 +58,8 @@ class JournalListSerializer(ModelSerializer):
             'publish',
             'createTS',
             'updateTS',
+            # 'update_url',
+            # 'delete_url',
         ]
 
 

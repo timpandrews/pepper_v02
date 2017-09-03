@@ -70,7 +70,7 @@ class JournalDetailAPIView_by_slug(RetrieveAPIView):
 
 
 class JournalListAPIView(ListAPIView):
-    serializer_class = JournalDetailSerializer
+    serializer_class = JournalListSerializer
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = [
         'title',
