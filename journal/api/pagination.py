@@ -10,4 +10,4 @@ class JournalLimitOffsetPagination(LimitOffsetPagination):
 
 
 class JournalPageNumberPagination(PageNumberPagination):
-    page_size = 2
+    page_size = 5
