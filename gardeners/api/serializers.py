@@ -1,10 +1,10 @@
 from rest_framework.serializers import (
+    HyperlinkedIdentityField,
     ModelSerializer,
     SerializerMethodField,
 )
 
 from gardeners.models import Following
-
 
 class FollowingDetailSerializer(ModelSerializer):
     userName = SerializerMethodField()
@@ -32,7 +32,6 @@ class FollowingListSerializer(ModelSerializer):
     class Meta:
         model = Following
         fields = [
-            # 'url',
             'id',
             'user',
             'userName',

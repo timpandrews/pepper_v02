@@ -4,14 +4,15 @@ from rest_framework.serializers import (
     SerializerMethodField,
 )
 
-journal_detail_url = HyperlinkedIdentityField(view_name='journal-api:detail')
-journal_delete_url = HyperlinkedIdentityField(view_name='journal-api:delete')
-journal_update_url = HyperlinkedIdentityField(view_name='journal-api:update')
-
 from comments.api.serializers import CommentSerializer
 from comments.models import Comment
 
 from journal.models import Journal
+
+
+journal_detail_url = HyperlinkedIdentityField(view_name='journal-api:detail')
+journal_delete_url = HyperlinkedIdentityField(view_name='journal-api:delete')
+journal_update_url = HyperlinkedIdentityField(view_name='journal-api:update')
 
 
 class JournalCreateUpdateSerializer(ModelSerializer):

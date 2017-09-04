@@ -34,13 +34,7 @@ class FollowingDetailAPIView(RetrieveAPIView):
 
 class FollowingListAPIView(ListAPIView):
     serializer_class = FollowingListSerializer
-    filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = [
-        'user',
-        'folloiwng',
-        'user__first_name',
-        'user__last_name',
-    ]
+    filter_backends = [OrderingFilter]
     pagination_class = JournalPageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
