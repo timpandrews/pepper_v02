@@ -51,9 +51,10 @@ class JournalDetailSerializer(ModelSerializer):
         return str(obj.user.username)
 
     def get_comments(self, obj):
+        content_type = obj.get_content_type
+
         comments_qs = Comment.objects.filter_by_instance(obj)
-        comments = CommentSerializer(comments_qs, many=True).data
-        return comments
+        comments = 'test'
 
 
 class JournalListSerializer(ModelSerializer):

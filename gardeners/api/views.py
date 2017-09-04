@@ -4,6 +4,7 @@ from rest_framework.filters import (
 )
 from rest_framework.generics import (
     ListAPIView,
+    RetrieveAPIView,
 )
 from rest_framework.permissions import (
     AllowAny,
@@ -13,18 +14,22 @@ from rest_framework.permissions import (
 )
 
 from gardeners.models import Following
-from gardeners.api.serializers import FollowingListSerializer
+from gardeners.api.serializers import (
+    FollowingDetailSerializer,
+    FollowingListSerializer,
+)
 
 from journal.api.pagination import (
     JournalPageNumberPagination,
 )
 from journal.api.permissions import IsOwnerOrReadOnly
-from journal.api.serializers import (
-    JournalCreateUpdateSerializer,
-    JournalDetailSerializer,
-    JournalListSerializer,
-)
 
+
+
+class FollowingDetailAPIView(RetrieveAPIView):
+    queryset = Following.objects.all()
+    serializer_class = FollowingDetailSerializer
+    lookup_field = 'id'
 
 
 class FollowingListAPIView(ListAPIView):
