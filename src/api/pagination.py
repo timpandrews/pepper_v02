@@ -4,10 +4,10 @@ from rest_framework.pagination import (
     )
 
 
-class JournalLimitOffsetPagination(LimitOffsetPagination):
+class PepperLimitOffsetPagination(LimitOffsetPagination):
     default_limit = 10
     max_limit = 10
 
 
-class JournalPageNumberPagination(PageNumberPagination):
+class PepperPageNumberPagination(PageNumberPagination):
     page_size = 5

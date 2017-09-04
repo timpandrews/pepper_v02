@@ -1,5 +1,11 @@
 from django.db.models import Q
 
+from journal.api.serializers import (
+    JournalCreateUpdateSerializer,
+    JournalDetailSerializer,
+    JournalListSerializer,
+)
+from journal.models import Journal
 from rest_framework.filters import (
     SearchFilter,
     OrderingFilter,
@@ -10,30 +16,14 @@ from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
     RetrieveUpdateAPIView,
-    UpdateAPIView,
-)
-from rest_framework.pagination import (
-    LimitOffsetPagination,
-    PageNumberPagination,
 )
 from rest_framework.permissions import (
-    AllowAny,
-    IsAdminUser,
     IsAuthenticated,
     IsAuthenticatedOrReadOnly,
 )
 
-from journal.models import Journal
-from journal.api.pagination import (
-    JournalLimitOffsetPagination,
-    JournalPageNumberPagination,
-)
-from journal.api.permissions import IsOwnerOrReadOnly
-from journal.api.serializers import (
-    JournalCreateUpdateSerializer,
-    JournalDetailSerializer,
-    JournalListSerializer,
-)
+from src.api.pagination import PepperPageNumberPagination
+from src.api.permissions import IsOwnerOrReadOnly
 
 
 class JournalCreateAPIView(CreateAPIView):
@@ -78,7 +68,7 @@ class JournalListAPIView(ListAPIView):
         'user__first_name',
         'user__last_name',
     ]
-    pagination_class = JournalPageNumberPagination
+    pagination_class = PepperPageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
         qs_list = Journal.objects.all()

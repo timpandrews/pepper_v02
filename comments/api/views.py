@@ -1,34 +1,22 @@
-from django.db.models import Q
+from src.api.pagination import PepperPageNumberPagination
 
+from comments.api.serializers import (
+    CommentSerializer,
+    CommentDetailSerializer
+)
+from comments.models import Comment
+from django.db.models import Q
 from rest_framework.filters import (
     SearchFilter,
     OrderingFilter,
 )
 from rest_framework.generics import (
     CreateAPIView,
-    DestroyAPIView,
     ListAPIView,
-    UpdateAPIView,
-    RetrieveAPIView,
-    RetrieveUpdateAPIView
+    RetrieveAPIView
 )
 from rest_framework.permissions import (
-    AllowAny,
     IsAuthenticated,
-    IsAdminUser,
-    IsAuthenticatedOrReadOnly,
-)
-
-from journal.api.permissions import IsOwnerOrReadOnly
-from journal.api.pagination import (
-    JournalLimitOffsetPagination,
-    JournalPageNumberPagination,
-)
-
-from comments.models import Comment
-from comments.api.serializers import (
-    CommentSerializer,
-    CommentDetailSerializer
 )
 
 
@@ -51,7 +39,7 @@ class CommentListAPIView(ListAPIView):
     serializer_class = CommentSerializer
     filter_backends= [SearchFilter, OrderingFilter]
     search_fields = ['content', 'user__first_name', 'user__last_name']
-    pagination_class = JournalPageNumberPagination
+    pagination_class = PepperPageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
         #queryset_list = super(PostListAPIView, self).get_queryset(*args, **kwargs)
