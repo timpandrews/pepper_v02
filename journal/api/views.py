@@ -29,7 +29,6 @@ from src.api.permissions import IsOwnerOrReadOnly
 class JournalCreateAPIView(CreateAPIView):
     queryset = Journal.objects.all()
     serializer_class = JournalCreateUpdateSerializer
-    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -38,14 +37,14 @@ class JournalCreateAPIView(CreateAPIView):
 class JournalDeleteAPIView_by_id(DestroyAPIView):
     queryset = Journal.objects.all()
     serializer_class = JournalDetailSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
 
 
 class JournalDeleteAPIView_by_slug(DestroyAPIView):
     queryset = Journal.objects.all()
     serializer_class = JournalDetailSerializer
     lookup_field = 'slug'
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
 
 
 class JournalDetailAPIView_by_id(RetrieveAPIView):

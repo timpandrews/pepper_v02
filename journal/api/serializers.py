@@ -7,6 +7,8 @@ from rest_framework.serializers import (
 from comments.api.serializers import CommentSerializer
 from comments.models import Comment
 
+from profiles.api.serializers import UserDetailSerializer
+
 from journal.models import Journal
 
 
@@ -30,7 +32,7 @@ class JournalDetailSerializer(ModelSerializer):
     # update_url = journal_update_url
     # delete_url = journal_delete_url
     comments = SerializerMethodField()
-    user = SerializerMethodField()
+    user = UserDetailSerializer(read_only=True)
     class Meta:
         model = Journal
         fields = [
@@ -48,9 +50,6 @@ class JournalDetailSerializer(ModelSerializer):
             # 'delete_url',
         ]
 
-    def get_user(self, obj):
-        return str(obj.user.username)
-
     def get_comments(self, obj):
         content_type = obj.get_content_type
 
@@ -62,7 +61,7 @@ class JournalListSerializer(ModelSerializer):
     url = journal_detail_url
     # update_url = journal_update_url
     # delete_url = journal_delete_url
-    user = SerializerMethodField()
+    user = UserDetailSerializer(read_only=True)
     class Meta:
         model = Journal
         fields = [
@@ -80,7 +79,5 @@ class JournalListSerializer(ModelSerializer):
             # 'delete_url',
         ]
 
-    def get_user(self, obj):
-        return str(obj.user.username)
 
 

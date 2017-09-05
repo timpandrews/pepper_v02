@@ -9,13 +9,24 @@ from rest_framework.serializers import (
 )
 
 
+class UserDetailSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'id',
+            'username',
+            'email',
+            'first_name',
+            'last_name',
+        ]
+
+
 class UserListSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = [
             'id',
             'username',
-            'password',
             'email',
         ]
 
