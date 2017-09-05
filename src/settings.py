@@ -69,11 +69,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-
     'ckeditor',
     'ckeditor_uploader',
-
     'crispy_forms',
+    'rest_framework',
 ]
 
 SITE_ID = 1
@@ -214,6 +213,20 @@ CKEDITOR_UPLOAD_PATH = "user_images/"
 CKEDITOR_RESTRICT_BY_USER = True
 CKEDITOR_BROWSE_SHOW_DIRS = True
 
+
+# Django REST Framwork
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+         'rest_framework.authentication.SessionAuthentication',
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    )
+}
 
 
 # Get Local Settings from local_settings.py
