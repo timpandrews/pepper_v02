@@ -23,6 +23,7 @@ from django.views.decorators.cache import never_cache
 from journal.views import home
 
 from ckeditor_uploader import views
+from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     url(r'^$', home, name='home'),
@@ -36,6 +37,8 @@ urlpatterns = [
     url(r'^api/gardeners/', include("gardeners.api.urls", namespace="gardeners-api")),
     url(r'^api/journal/', include("journal.api.urls", namespace="journal-api")),
     url(r'^api/user/', include("profiles.api.urls", namespace="user-api")),
+
+    url(r'^api/auth/token/', obtain_jwt_token),
 ]
 
 # urlpatterns for ckeditor
