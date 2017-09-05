@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^api/comments/', include("comments.api.urls", namespace="comments-api")),
     url(r'^api/gardeners/', include("gardeners.api.urls", namespace="gardeners-api")),
     url(r'^api/journal/', include("journal.api.urls", namespace="journal-api")),
+    url(r'^api/user/', include("profiles.api.urls", namespace="user-api")),
 ]
 
 # urlpatterns for ckeditor
